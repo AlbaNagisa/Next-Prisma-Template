@@ -9,16 +9,15 @@ datasource db {
 
 model Task {
   id        Int     @id @default(autoincrement())
-  title     String
+  name      String
   completed Boolean @default(false)
   listId    String
 
-  list TaskList @relation(fields: [listId], references: [id])
+  list TaskList @relation(fields: [listId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model TaskList {
   id    String @id @default(uuid())
-  title String
-
+  name  String
   tasks Task[]
 }
